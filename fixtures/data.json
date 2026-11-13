@@ -1,0 +1,4456 @@
+{
+  "meta": {
+    "name": "补货预测工作台",
+    "description": "采购按周订货，sales 的 quantity 是已完成销量而非潜在需求，observed=false 表示记录不完整。",
+    "groups": [
+      "华东",
+      "华南"
+    ],
+    "default_cutoff": 24,
+    "min_cutoff": 0,
+    "max_cutoff": 48
+  },
+  "tables": {
+    "products": [
+      {
+        "product": "p1",
+        "name": "款式1",
+        "inactive_from": null
+      },
+      {
+        "product": "p2",
+        "name": "款式2",
+        "inactive_from": null
+      },
+      {
+        "product": "p3",
+        "name": "款式3",
+        "inactive_from": null
+      },
+      {
+        "product": "p4",
+        "name": "款式4",
+        "inactive_from": null
+      },
+      {
+        "product": "p5",
+        "name": "款式5",
+        "inactive_from": null
+      },
+      {
+        "product": "p6",
+        "name": "款式6",
+        "inactive_from": null
+      },
+      {
+        "product": "p7",
+        "name": "款式7",
+        "inactive_from": null
+      },
+      {
+        "product": "p8",
+        "name": "款式8",
+        "inactive_from": null
+      },
+      {
+        "product": "p9",
+        "name": "款式9",
+        "inactive_from": 21
+      }
+    ],
+    "membership": [
+      {
+        "product": "p1",
+        "category": "c1",
+        "start": 1,
+        "end": null,
+        "known_at": 1
+      },
+      {
+        "product": "p2",
+        "category": "c1",
+        "start": 1,
+        "end": null,
+        "known_at": 1
+      },
+      {
+        "product": "p3",
+        "category": "c1",
+        "start": 1,
+        "end": 17,
+        "known_at": 1
+      },
+      {
+        "product": "p3",
+        "category": "c2",
+        "start": 17,
+        "end": null,
+        "known_at": 18
+      },
+      {
+        "product": "p4",
+        "category": "c2",
+        "start": 1,
+        "end": null,
+        "known_at": 1
+      },
+      {
+        "product": "p5",
+        "category": "c2",
+        "start": 1,
+        "end": null,
+        "known_at": 1
+      },
+      {
+        "product": "p6",
+        "category": "c2",
+        "start": 1,
+        "end": null,
+        "known_at": 1
+      },
+      {
+        "product": "p7",
+        "category": "c3",
+        "start": 1,
+        "end": null,
+        "known_at": 1
+      },
+      {
+        "product": "p8",
+        "category": "c3",
+        "start": 1,
+        "end": null,
+        "known_at": 1
+      },
+      {
+        "product": "p9",
+        "category": "c3",
+        "start": 1,
+        "end": null,
+        "known_at": 1
+      }
+    ],
+    "sales": [
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 1,
+        "quantity": 13,
+        "observed": true,
+        "known_at": 1
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 1,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 1
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 1,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 1
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 1,
+        "quantity": 13,
+        "observed": true,
+        "known_at": 1
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 1,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 1
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 1,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 1
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 1,
+        "quantity": 29,
+        "observed": true,
+        "known_at": 1
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 1,
+        "quantity": 27,
+        "observed": true,
+        "known_at": 1
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 1,
+        "quantity": 28,
+        "observed": true,
+        "known_at": 1
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 1,
+        "quantity": null,
+        "observed": false,
+        "known_at": 1
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 1,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 1
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 1,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 1
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 1,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 1
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 1,
+        "quantity": null,
+        "observed": false,
+        "known_at": 1
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 1,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 1
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 1,
+        "quantity": 31,
+        "observed": true,
+        "known_at": 1
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 1,
+        "quantity": 28,
+        "observed": true,
+        "known_at": 1
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 1,
+        "quantity": 31,
+        "observed": true,
+        "known_at": 1
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 2,
+        "quantity": 15,
+        "observed": true,
+        "known_at": 2
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 2,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 2
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 2,
+        "quantity": 23,
+        "observed": true,
+        "known_at": 2
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 2,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 2
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 2,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 2
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 2,
+        "quantity": 29,
+        "observed": true,
+        "known_at": 2
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 2,
+        "quantity": 29,
+        "observed": true,
+        "known_at": 2
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 2,
+        "quantity": 34,
+        "observed": true,
+        "known_at": 2
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 2,
+        "quantity": 34,
+        "observed": true,
+        "known_at": 2
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 2,
+        "quantity": 15,
+        "observed": true,
+        "known_at": 2
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 2,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 2
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 2,
+        "quantity": 23,
+        "observed": true,
+        "known_at": 2
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 2,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 2
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 2,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 2
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 2,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 2
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 2,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 2
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 2,
+        "quantity": null,
+        "observed": false,
+        "known_at": 2
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 2,
+        "quantity": 35,
+        "observed": true,
+        "known_at": 2
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 3,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 3
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 3,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 3
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 3,
+        "quantity": 23,
+        "observed": true,
+        "known_at": 3
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 3,
+        "quantity": 23,
+        "observed": true,
+        "known_at": 3
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 3,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 3
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 3,
+        "quantity": null,
+        "observed": false,
+        "known_at": 3
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 3,
+        "quantity": 25,
+        "observed": true,
+        "known_at": 3
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 3,
+        "quantity": 34,
+        "observed": true,
+        "known_at": 3
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 3,
+        "quantity": 28,
+        "observed": true,
+        "known_at": 3
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 3,
+        "quantity": null,
+        "observed": false,
+        "known_at": 3
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 3,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 3
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 3,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 3
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 3,
+        "quantity": 15,
+        "observed": true,
+        "known_at": 3
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 3,
+        "quantity": 25,
+        "observed": true,
+        "known_at": 3
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 3,
+        "quantity": 23,
+        "observed": true,
+        "known_at": 3
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 3,
+        "quantity": 27,
+        "observed": true,
+        "known_at": 3
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 3,
+        "quantity": 33,
+        "observed": true,
+        "known_at": 3
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 3,
+        "quantity": 36,
+        "observed": true,
+        "known_at": 3
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 4,
+        "quantity": 12,
+        "observed": true,
+        "known_at": 4
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 4,
+        "quantity": 15,
+        "observed": true,
+        "known_at": 4
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 4,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 4
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 4,
+        "quantity": 23,
+        "observed": true,
+        "known_at": 4
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 4,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 4
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 4,
+        "quantity": 29,
+        "observed": true,
+        "known_at": 4
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 4,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 4
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 4,
+        "quantity": 31,
+        "observed": true,
+        "known_at": 4
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 4,
+        "quantity": 32,
+        "observed": true,
+        "known_at": 4
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 4,
+        "quantity": 13,
+        "observed": true,
+        "known_at": 4
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 4,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 4
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 4,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 4
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 4,
+        "quantity": 25,
+        "observed": true,
+        "known_at": 4
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 4,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 4
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 4,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 4
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 4,
+        "quantity": 28,
+        "observed": true,
+        "known_at": 4
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 4,
+        "quantity": 29,
+        "observed": true,
+        "known_at": 4
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 4,
+        "quantity": 33,
+        "observed": true,
+        "known_at": 4
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 5,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 5
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 5,
+        "quantity": null,
+        "observed": false,
+        "known_at": 5
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 5,
+        "quantity": 11,
+        "observed": true,
+        "known_at": 5
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 5,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 5
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 5,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 5
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 5,
+        "quantity": 30,
+        "observed": true,
+        "known_at": 5
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 5,
+        "quantity": 25,
+        "observed": true,
+        "known_at": 5
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 5,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 5
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 5,
+        "quantity": 31,
+        "observed": true,
+        "known_at": 5
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 5,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 5
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 5,
+        "quantity": 13,
+        "observed": true,
+        "known_at": 5
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 5,
+        "quantity": 15,
+        "observed": true,
+        "known_at": 5
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 5,
+        "quantity": 18,
+        "observed": true,
+        "known_at": 5
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 5,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 5
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 5,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 5
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 5,
+        "quantity": 28,
+        "observed": true,
+        "known_at": 5
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 5,
+        "quantity": 31,
+        "observed": true,
+        "known_at": 5
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 5,
+        "quantity": 30,
+        "observed": true,
+        "known_at": 5
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 6,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 6
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 6,
+        "quantity": 12,
+        "observed": true,
+        "known_at": 6
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 6,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 6
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 6,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 6
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 6,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 6
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 6,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 6
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 6,
+        "quantity": 28,
+        "observed": true,
+        "known_at": 6
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 6,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 6
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 6,
+        "quantity": 34,
+        "observed": true,
+        "known_at": 6
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 6,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 6
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 6,
+        "quantity": 13,
+        "observed": true,
+        "known_at": 6
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 6,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 6
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 6,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 6
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 6,
+        "quantity": 27,
+        "observed": true,
+        "known_at": 6
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 6,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 6
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 6,
+        "quantity": 27,
+        "observed": true,
+        "known_at": 6
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 6,
+        "quantity": 29,
+        "observed": true,
+        "known_at": 6
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 6,
+        "quantity": 31,
+        "observed": true,
+        "known_at": 6
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 7,
+        "quantity": 7,
+        "observed": true,
+        "known_at": 7
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 7,
+        "quantity": 18,
+        "observed": true,
+        "known_at": 7
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 7,
+        "quantity": 12,
+        "observed": true,
+        "known_at": 7
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 7,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 7
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 7,
+        "quantity": 15,
+        "observed": true,
+        "known_at": 7
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 7,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 7
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 7,
+        "quantity": null,
+        "observed": false,
+        "known_at": 7
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 7,
+        "quantity": 23,
+        "observed": true,
+        "known_at": 7
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 7,
+        "quantity": 29,
+        "observed": true,
+        "known_at": 7
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 7,
+        "quantity": 9,
+        "observed": true,
+        "known_at": 7
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 7,
+        "quantity": 18,
+        "observed": true,
+        "known_at": 7
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 7,
+        "quantity": 12,
+        "observed": true,
+        "known_at": 7
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 7,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 7
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 7,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 7
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 7,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 7
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 7,
+        "quantity": null,
+        "observed": false,
+        "known_at": 7
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 7,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 7
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 7,
+        "quantity": 28,
+        "observed": true,
+        "known_at": 7
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 8,
+        "quantity": 11,
+        "observed": true,
+        "known_at": 8
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 8,
+        "quantity": 15,
+        "observed": true,
+        "known_at": 8
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 8,
+        "quantity": 15,
+        "observed": true,
+        "known_at": 8
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 8,
+        "quantity": 12,
+        "observed": true,
+        "known_at": 8
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 8,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 8
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 8,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 8
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 8,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 8
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 8,
+        "quantity": null,
+        "observed": false,
+        "known_at": 8
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 8,
+        "quantity": 32,
+        "observed": true,
+        "known_at": 8
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 8,
+        "quantity": 6,
+        "observed": true,
+        "known_at": 8
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 8,
+        "quantity": null,
+        "observed": false,
+        "known_at": 8
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 8,
+        "quantity": 10,
+        "observed": true,
+        "known_at": 8
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 8,
+        "quantity": 15,
+        "observed": true,
+        "known_at": 8
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 8,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 8
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 8,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 8
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 8,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 8
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 8,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 8
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 8,
+        "quantity": 23,
+        "observed": true,
+        "known_at": 8
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 9,
+        "quantity": 4,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 9,
+        "quantity": 7,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 9,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 9,
+        "quantity": 10,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 9,
+        "quantity": null,
+        "observed": false,
+        "known_at": 10
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 9,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 9,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 9,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 9,
+        "quantity": 25,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 9,
+        "quantity": 9,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 9,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 9,
+        "quantity": 7,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 9,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 9,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 9,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 9,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 9,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 9,
+        "quantity": 27,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 10,
+        "quantity": 9,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 10,
+        "quantity": 9,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 10,
+        "quantity": null,
+        "observed": false,
+        "known_at": 10
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 10,
+        "quantity": null,
+        "observed": false,
+        "known_at": 10
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 10,
+        "quantity": 12,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 10,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 10,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 10,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 10,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 10,
+        "quantity": 8,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 10,
+        "quantity": 11,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 10,
+        "quantity": 7,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 10,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 10,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 10,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 10,
+        "quantity": 18,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 10,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 10,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 10
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 11,
+        "quantity": 5,
+        "observed": true,
+        "known_at": 11
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 11,
+        "quantity": 8,
+        "observed": true,
+        "known_at": 11
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 11,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 11
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 11,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 11
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 11,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 11
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 11,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 11
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 11,
+        "quantity": 25,
+        "observed": true,
+        "known_at": 11
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 11,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 11
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 11,
+        "quantity": 29,
+        "observed": true,
+        "known_at": 11
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 11,
+        "quantity": 7,
+        "observed": true,
+        "known_at": 11
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 11,
+        "quantity": 10,
+        "observed": true,
+        "known_at": 11
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 11,
+        "quantity": 15,
+        "observed": true,
+        "known_at": 11
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 11,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 11
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 11,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 11
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 11,
+        "quantity": 15,
+        "observed": true,
+        "known_at": 11
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 11,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 11
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 11,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 11
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 11,
+        "quantity": 25,
+        "observed": true,
+        "known_at": 11
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 12,
+        "quantity": 10,
+        "observed": true,
+        "known_at": 12
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 12,
+        "quantity": 8,
+        "observed": true,
+        "known_at": 12
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 12,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 12
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 12,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 12
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 12,
+        "quantity": 12,
+        "observed": true,
+        "known_at": 12
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 12,
+        "quantity": 27,
+        "observed": true,
+        "known_at": 12
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 12,
+        "quantity": 25,
+        "observed": true,
+        "known_at": 12
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 12,
+        "quantity": 28,
+        "observed": true,
+        "known_at": 12
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 12,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 12
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 12,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 12
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 12,
+        "quantity": null,
+        "observed": false,
+        "known_at": 12
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 12,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 12
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 12,
+        "quantity": 15,
+        "observed": true,
+        "known_at": 12
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 12,
+        "quantity": null,
+        "observed": false,
+        "known_at": 12
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 12,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 12
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 12,
+        "quantity": 23,
+        "observed": true,
+        "known_at": 12
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 12,
+        "quantity": 27,
+        "observed": true,
+        "known_at": 12
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 12,
+        "quantity": 28,
+        "observed": true,
+        "known_at": 12
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 13,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 13
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 13,
+        "quantity": 15,
+        "observed": true,
+        "known_at": 13
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 13,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 13
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 13,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 13
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 13,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 13
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 13,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 13
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 13,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 13
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 13,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 13
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 13,
+        "quantity": 27,
+        "observed": true,
+        "known_at": 13
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 13,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 13
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 13,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 13
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 13,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 13
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 13,
+        "quantity": 15,
+        "observed": true,
+        "known_at": 13
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 13,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 13
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 13,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 13
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 13,
+        "quantity": 23,
+        "observed": true,
+        "known_at": 13
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 13,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 13
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 13,
+        "quantity": 27,
+        "observed": true,
+        "known_at": 13
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 14,
+        "quantity": 13,
+        "observed": true,
+        "known_at": 14
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 14,
+        "quantity": 18,
+        "observed": true,
+        "known_at": 14
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 14,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 14
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 14,
+        "quantity": 13,
+        "observed": true,
+        "known_at": 14
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 14,
+        "quantity": 23,
+        "observed": true,
+        "known_at": 14
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 14,
+        "quantity": 23,
+        "observed": true,
+        "known_at": 14
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 14,
+        "quantity": 29,
+        "observed": true,
+        "known_at": 14
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 14,
+        "quantity": 28,
+        "observed": true,
+        "known_at": 14
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 14,
+        "quantity": null,
+        "observed": false,
+        "known_at": 14
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 14,
+        "quantity": 18,
+        "observed": true,
+        "known_at": 14
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 14,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 14
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 14,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 14
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 14,
+        "quantity": 25,
+        "observed": true,
+        "known_at": 14
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 14,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 14
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 14,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 14
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 14,
+        "quantity": 29,
+        "observed": true,
+        "known_at": 14
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 14,
+        "quantity": 31,
+        "observed": true,
+        "known_at": 14
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 14,
+        "quantity": 30,
+        "observed": true,
+        "known_at": 14
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 15,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 15
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 15,
+        "quantity": 13,
+        "observed": true,
+        "known_at": 15
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 15,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 15
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 15,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 15
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 15,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 15
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 15,
+        "quantity": 33,
+        "observed": true,
+        "known_at": 15
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 15,
+        "quantity": 27,
+        "observed": true,
+        "known_at": 15
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 15,
+        "quantity": 25,
+        "observed": true,
+        "known_at": 15
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 15,
+        "quantity": null,
+        "observed": false,
+        "known_at": 15
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 15,
+        "quantity": 15,
+        "observed": true,
+        "known_at": 15
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 15,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 15
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 15,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 15
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 15,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 15
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 15,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 15
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 15,
+        "quantity": 25,
+        "observed": true,
+        "known_at": 15
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 15,
+        "quantity": 31,
+        "observed": true,
+        "known_at": 15
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 15,
+        "quantity": 29,
+        "observed": true,
+        "known_at": 15
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 15,
+        "quantity": 29,
+        "observed": true,
+        "known_at": 15
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 16,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 16
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 16,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 16
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 16,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 16
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 16,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 16
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 16,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 16
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 16,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 16
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 16,
+        "quantity": 31,
+        "observed": true,
+        "known_at": 16
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 16,
+        "quantity": 31,
+        "observed": true,
+        "known_at": 16
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 16,
+        "quantity": 33,
+        "observed": true,
+        "known_at": 16
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 16,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 16
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 16,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 16
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 16,
+        "quantity": null,
+        "observed": false,
+        "known_at": 16
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 16,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 16
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 16,
+        "quantity": 25,
+        "observed": true,
+        "known_at": 16
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 16,
+        "quantity": 28,
+        "observed": true,
+        "known_at": 16
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 16,
+        "quantity": 27,
+        "observed": true,
+        "known_at": 16
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 16,
+        "quantity": 35,
+        "observed": true,
+        "known_at": 16
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 16,
+        "quantity": 31,
+        "observed": true,
+        "known_at": 16
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 17,
+        "quantity": 12,
+        "observed": true,
+        "known_at": 17
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 17,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 17
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 17,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 17
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 17,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 17
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 17,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 17
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 17,
+        "quantity": 23,
+        "observed": true,
+        "known_at": 17
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 17,
+        "quantity": 23,
+        "observed": true,
+        "known_at": 17
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 17,
+        "quantity": 29,
+        "observed": true,
+        "known_at": 17
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 17,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 17
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 17,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 17
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 17,
+        "quantity": 15,
+        "observed": true,
+        "known_at": 17
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 17,
+        "quantity": 18,
+        "observed": true,
+        "known_at": 17
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 17,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 17
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 17,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 17
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 17,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 17
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 17,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 17
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 17,
+        "quantity": 32,
+        "observed": true,
+        "known_at": 17
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 17,
+        "quantity": 31,
+        "observed": true,
+        "known_at": 17
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 18,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 18,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 18,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 18,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 18,
+        "quantity": 18,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 18,
+        "quantity": 30,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 18,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 18,
+        "quantity": 29,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 18,
+        "quantity": null,
+        "observed": false,
+        "known_at": 19
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 18,
+        "quantity": 13,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 18,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 18,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 18,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 18,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 18,
+        "quantity": 18,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 18,
+        "quantity": 28,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 18,
+        "quantity": 28,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 18,
+        "quantity": 28,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 19,
+        "quantity": 10,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 19,
+        "quantity": 11,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 19,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 19,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 19,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 19,
+        "quantity": 15,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 19,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 19,
+        "quantity": 27,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 19,
+        "quantity": null,
+        "observed": false,
+        "known_at": 19
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 19,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 19,
+        "quantity": 13,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 19,
+        "quantity": null,
+        "observed": false,
+        "known_at": 19
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 19,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 19,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 19,
+        "quantity": 28,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 19,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 19,
+        "quantity": 25,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 19,
+        "quantity": 27,
+        "observed": true,
+        "known_at": 19
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 20,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 20
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 20,
+        "quantity": 11,
+        "observed": true,
+        "known_at": 20
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 20,
+        "quantity": 11,
+        "observed": true,
+        "known_at": 20
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 20,
+        "quantity": 18,
+        "observed": true,
+        "known_at": 20
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 20,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 20
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 20,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 20
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 20,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 20
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 20,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 20
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 20,
+        "quantity": 27,
+        "observed": true,
+        "known_at": 20
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 20,
+        "quantity": 13,
+        "observed": true,
+        "known_at": 20
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 20,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 20
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 20,
+        "quantity": 13,
+        "observed": true,
+        "known_at": 20
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 20,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 20
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 20,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 20
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 20,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 20
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 20,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 20
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 20,
+        "quantity": 23,
+        "observed": true,
+        "known_at": 20
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 20,
+        "quantity": 27,
+        "observed": true,
+        "known_at": 20
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 21,
+        "quantity": 12,
+        "observed": true,
+        "known_at": 21
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 21,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 21
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 21,
+        "quantity": 18,
+        "observed": true,
+        "known_at": 21
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 21,
+        "quantity": 15,
+        "observed": true,
+        "known_at": 21
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 21,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 21
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 21,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 21
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 21,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 21
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 21,
+        "quantity": 23,
+        "observed": true,
+        "known_at": 21
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 21,
+        "quantity": 0,
+        "observed": true,
+        "known_at": 21
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 21,
+        "quantity": 10,
+        "observed": true,
+        "known_at": 21
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 21,
+        "quantity": 13,
+        "observed": true,
+        "known_at": 21
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 21,
+        "quantity": 10,
+        "observed": true,
+        "known_at": 21
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 21,
+        "quantity": null,
+        "observed": false,
+        "known_at": 21
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 21,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 21
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 21,
+        "quantity": null,
+        "observed": false,
+        "known_at": 21
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 21,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 21
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 21,
+        "quantity": 23,
+        "observed": true,
+        "known_at": 21
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 21,
+        "quantity": 0,
+        "observed": true,
+        "known_at": 21
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 22,
+        "quantity": 4,
+        "observed": true,
+        "known_at": 22
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 22,
+        "quantity": 9,
+        "observed": true,
+        "known_at": 22
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 22,
+        "quantity": 10,
+        "observed": true,
+        "known_at": 22
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 22,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 22
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 22,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 22
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 22,
+        "quantity": 15,
+        "observed": true,
+        "known_at": 22
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 22,
+        "quantity": 28,
+        "observed": true,
+        "known_at": 22
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 22,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 22
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 22,
+        "quantity": 0,
+        "observed": true,
+        "known_at": 22
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 22,
+        "quantity": 10,
+        "observed": true,
+        "known_at": 22
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 22,
+        "quantity": 11,
+        "observed": true,
+        "known_at": 22
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 22,
+        "quantity": 11,
+        "observed": true,
+        "known_at": 22
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 22,
+        "quantity": 9,
+        "observed": true,
+        "known_at": 22
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 22,
+        "quantity": null,
+        "observed": false,
+        "known_at": 22
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 22,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 22
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 22,
+        "quantity": 23,
+        "observed": true,
+        "known_at": 22
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 22,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 22
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 22,
+        "quantity": 0,
+        "observed": true,
+        "known_at": 22
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 23,
+        "quantity": 7,
+        "observed": true,
+        "known_at": 23
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 23,
+        "quantity": 9,
+        "observed": true,
+        "known_at": 23
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 23,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 23
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 23,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 23
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 23,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 23
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 23,
+        "quantity": 18,
+        "observed": true,
+        "known_at": 23
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 23,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 23
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 23,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 23
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 23,
+        "quantity": 0,
+        "observed": true,
+        "known_at": 23
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 23,
+        "quantity": 10,
+        "observed": true,
+        "known_at": 23
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 23,
+        "quantity": 8,
+        "observed": true,
+        "known_at": 23
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 23,
+        "quantity": 11,
+        "observed": true,
+        "known_at": 23
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 23,
+        "quantity": 23,
+        "observed": true,
+        "known_at": 23
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 23,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 23
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 23,
+        "quantity": null,
+        "observed": false,
+        "known_at": 23
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 23,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 23
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 23,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 23
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 23,
+        "quantity": 0,
+        "observed": true,
+        "known_at": 23
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 24,
+        "quantity": 6,
+        "observed": true,
+        "known_at": 24
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 24,
+        "quantity": 9,
+        "observed": true,
+        "known_at": 24
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 24,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 24
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 24,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 24
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 24,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 24
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 24,
+        "quantity": 27,
+        "observed": true,
+        "known_at": 24
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 24,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 24
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 24,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 24
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 24,
+        "quantity": 0,
+        "observed": true,
+        "known_at": 24
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 24,
+        "quantity": 10,
+        "observed": true,
+        "known_at": 24
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 24,
+        "quantity": 13,
+        "observed": true,
+        "known_at": 24
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 24,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 24
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 24,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 24
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 24,
+        "quantity": null,
+        "observed": false,
+        "known_at": 24
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 24,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 24
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 24,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 24
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 24,
+        "quantity": null,
+        "observed": false,
+        "known_at": 24
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 24,
+        "quantity": 0,
+        "observed": true,
+        "known_at": 24
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 25,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 25
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 25,
+        "quantity": 15,
+        "observed": true,
+        "known_at": 25
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 25,
+        "quantity": 18,
+        "observed": true,
+        "known_at": 25
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 25,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 25
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 25,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 25
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 25,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 25
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 25,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 25
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 25,
+        "quantity": 28,
+        "observed": true,
+        "known_at": 25
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 25,
+        "quantity": 0,
+        "observed": true,
+        "known_at": 25
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 25,
+        "quantity": 9,
+        "observed": true,
+        "known_at": 25
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 25,
+        "quantity": 12,
+        "observed": true,
+        "known_at": 25
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 25,
+        "quantity": 13,
+        "observed": true,
+        "known_at": 25
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 25,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 25
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 25,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 25
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 25,
+        "quantity": 25,
+        "observed": true,
+        "known_at": 25
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 25,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 25
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 25,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 25
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 25,
+        "quantity": 0,
+        "observed": true,
+        "known_at": 25
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 26,
+        "quantity": 12,
+        "observed": true,
+        "known_at": 26
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 26,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 26
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 26,
+        "quantity": null,
+        "observed": false,
+        "known_at": 26
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 26,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 26
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 26,
+        "quantity": null,
+        "observed": false,
+        "known_at": 26
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 26,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 26
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 26,
+        "quantity": null,
+        "observed": false,
+        "known_at": 26
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 26,
+        "quantity": 27,
+        "observed": true,
+        "known_at": 26
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 26,
+        "quantity": 0,
+        "observed": true,
+        "known_at": 26
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 26,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 26
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 26,
+        "quantity": 18,
+        "observed": true,
+        "known_at": 26
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 26,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 26
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 26,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 26
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 26,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 26
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 26,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 26
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 26,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 26
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 26,
+        "quantity": 31,
+        "observed": true,
+        "known_at": 26
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 26,
+        "quantity": 0,
+        "observed": true,
+        "known_at": 26
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 27,
+        "quantity": 8,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 27,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 27,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 27,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 27,
+        "quantity": 25,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 27,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 27,
+        "quantity": null,
+        "observed": false,
+        "known_at": 28
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 27,
+        "quantity": 33,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 27,
+        "quantity": 0,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 27,
+        "quantity": 12,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 27,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 27,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 27,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 27,
+        "quantity": 25,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 27,
+        "quantity": 23,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 27,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 27,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 27,
+        "quantity": 0,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 28,
+        "quantity": null,
+        "observed": false,
+        "known_at": 28
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 28,
+        "quantity": 18,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 28,
+        "quantity": null,
+        "observed": false,
+        "known_at": 28
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 28,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 28,
+        "quantity": 29,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 28,
+        "quantity": 29,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 28,
+        "quantity": 33,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 28,
+        "quantity": 30,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 28,
+        "quantity": 0,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 28,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 28,
+        "quantity": 15,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 28,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 28,
+        "quantity": 18,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 28,
+        "quantity": 25,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 28,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 28,
+        "quantity": 25,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 28,
+        "quantity": 30,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 28,
+        "quantity": 0,
+        "observed": true,
+        "known_at": 28
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 29,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 29
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 29,
+        "quantity": 24,
+        "observed": true,
+        "known_at": 29
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 29,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 29
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 29,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 29
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 29,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 29
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 29,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 29
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 29,
+        "quantity": 23,
+        "observed": true,
+        "known_at": 29
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 29,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 29
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 29,
+        "quantity": 0,
+        "observed": true,
+        "known_at": 29
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 29,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 29
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 29,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 29
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 29,
+        "quantity": 23,
+        "observed": true,
+        "known_at": 29
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 29,
+        "quantity": 20,
+        "observed": true,
+        "known_at": 29
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 29,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 29
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 29,
+        "quantity": 18,
+        "observed": true,
+        "known_at": 29
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 29,
+        "quantity": 34,
+        "observed": true,
+        "known_at": 29
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 29,
+        "quantity": null,
+        "observed": false,
+        "known_at": 29
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 29,
+        "quantity": 0,
+        "observed": true,
+        "known_at": 29
+      },
+      {
+        "product": "p1",
+        "region": "华东",
+        "week": 30,
+        "quantity": 18,
+        "observed": true,
+        "known_at": 30
+      },
+      {
+        "product": "p2",
+        "region": "华东",
+        "week": 30,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 30
+      },
+      {
+        "product": "p3",
+        "region": "华东",
+        "week": 30,
+        "quantity": 14,
+        "observed": true,
+        "known_at": 30
+      },
+      {
+        "product": "p4",
+        "region": "华东",
+        "week": 30,
+        "quantity": 25,
+        "observed": true,
+        "known_at": 30
+      },
+      {
+        "product": "p5",
+        "region": "华东",
+        "week": 30,
+        "quantity": 26,
+        "observed": true,
+        "known_at": 30
+      },
+      {
+        "product": "p6",
+        "region": "华东",
+        "week": 30,
+        "quantity": 21,
+        "observed": true,
+        "known_at": 30
+      },
+      {
+        "product": "p7",
+        "region": "华东",
+        "week": 30,
+        "quantity": 29,
+        "observed": true,
+        "known_at": 30
+      },
+      {
+        "product": "p8",
+        "region": "华东",
+        "week": 30,
+        "quantity": 25,
+        "observed": true,
+        "known_at": 30
+      },
+      {
+        "product": "p9",
+        "region": "华东",
+        "week": 30,
+        "quantity": null,
+        "observed": false,
+        "known_at": 30
+      },
+      {
+        "product": "p1",
+        "region": "华南",
+        "week": 30,
+        "quantity": 17,
+        "observed": true,
+        "known_at": 30
+      },
+      {
+        "product": "p2",
+        "region": "华南",
+        "week": 30,
+        "quantity": 18,
+        "observed": true,
+        "known_at": 30
+      },
+      {
+        "product": "p3",
+        "region": "华南",
+        "week": 30,
+        "quantity": 19,
+        "observed": true,
+        "known_at": 30
+      },
+      {
+        "product": "p4",
+        "region": "华南",
+        "week": 30,
+        "quantity": 16,
+        "observed": true,
+        "known_at": 30
+      },
+      {
+        "product": "p5",
+        "region": "华南",
+        "week": 30,
+        "quantity": 22,
+        "observed": true,
+        "known_at": 30
+      },
+      {
+        "product": "p6",
+        "region": "华南",
+        "week": 30,
+        "quantity": null,
+        "observed": false,
+        "known_at": 30
+      },
+      {
+        "product": "p7",
+        "region": "华南",
+        "week": 30,
+        "quantity": 27,
+        "observed": true,
+        "known_at": 30
+      },
+      {
+        "product": "p8",
+        "region": "华南",
+        "week": 30,
+        "quantity": null,
+        "observed": false,
+        "known_at": 30
+      },
+      {
+        "product": "p9",
+        "region": "华南",
+        "week": 30,
+        "quantity": 0,
+        "observed": true,
+        "known_at": 30
+      }
+    ]
+  }
+}
