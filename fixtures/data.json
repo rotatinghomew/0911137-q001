@@ -15,47 +15,56 @@
       {
         "product": "p1",
         "name": "款式1",
-        "inactive_from": null
+        "inactive_from": null,
+        "launched_at": 1
       },
       {
         "product": "p2",
         "name": "款式2",
-        "inactive_from": null
+        "inactive_from": null,
+        "launched_at": 1
       },
       {
         "product": "p3",
         "name": "款式3",
-        "inactive_from": null
+        "inactive_from": null,
+        "launched_at": 1
       },
       {
         "product": "p4",
         "name": "款式4",
-        "inactive_from": null
+        "inactive_from": null,
+        "launched_at": 1
       },
       {
         "product": "p5",
         "name": "款式5",
-        "inactive_from": null
+        "inactive_from": null,
+        "launched_at": 1
       },
       {
         "product": "p6",
         "name": "款式6",
-        "inactive_from": null
+        "inactive_from": null,
+        "launched_at": 1
       },
       {
         "product": "p7",
         "name": "款式7",
-        "inactive_from": null
+        "inactive_from": null,
+        "launched_at": 1
       },
       {
         "product": "p8",
         "name": "款式8",
-        "inactive_from": null
+        "inactive_from": null,
+        "launched_at": 23
       },
       {
         "product": "p9",
         "name": "款式9",
-        "inactive_from": 21
+        "inactive_from": 21,
+        "launched_at": 1
       }
     ],
     "membership": [
@@ -118,9 +127,9 @@
       {
         "product": "p8",
         "category": "c3",
-        "start": 1,
+        "start": 23,
         "end": null,
-        "known_at": 1
+        "known_at": 20
       },
       {
         "product": "p9",
@@ -188,14 +197,6 @@
         "known_at": 1
       },
       {
-        "product": "p8",
-        "region": "华东",
-        "week": 1,
-        "quantity": 27,
-        "observed": true,
-        "known_at": 1
-      },
-      {
         "product": "p9",
         "region": "华东",
         "week": 1,
@@ -256,14 +257,6 @@
         "region": "华南",
         "week": 1,
         "quantity": 31,
-        "observed": true,
-        "known_at": 1
-      },
-      {
-        "product": "p8",
-        "region": "华南",
-        "week": 1,
-        "quantity": 28,
         "observed": true,
         "known_at": 1
       },
@@ -328,14 +321,6 @@
         "region": "华东",
         "week": 2,
         "quantity": 29,
-        "observed": true,
-        "known_at": 2
-      },
-      {
-        "product": "p8",
-        "region": "华东",
-        "week": 2,
-        "quantity": 34,
         "observed": true,
         "known_at": 2
       },
@@ -404,14 +389,6 @@
         "known_at": 2
       },
       {
-        "product": "p8",
-        "region": "华南",
-        "week": 2,
-        "quantity": null,
-        "observed": false,
-        "known_at": 2
-      },
-      {
         "product": "p9",
         "region": "华南",
         "week": 2,
@@ -476,14 +453,6 @@
         "known_at": 3
       },
       {
-        "product": "p8",
-        "region": "华东",
-        "week": 3,
-        "quantity": 34,
-        "observed": true,
-        "known_at": 3
-      },
-      {
         "product": "p9",
         "region": "华东",
         "week": 3,
@@ -544,14 +513,6 @@
         "region": "华南",
         "week": 3,
         "quantity": 27,
-        "observed": true,
-        "known_at": 3
-      },
-      {
-        "product": "p8",
-        "region": "华南",
-        "week": 3,
-        "quantity": 33,
         "observed": true,
         "known_at": 3
       },
@@ -620,14 +581,6 @@
         "known_at": 4
       },
       {
-        "product": "p8",
-        "region": "华东",
-        "week": 4,
-        "quantity": 31,
-        "observed": true,
-        "known_at": 4
-      },
-      {
         "product": "p9",
         "region": "华东",
         "week": 4,
@@ -688,14 +641,6 @@
         "region": "华南",
         "week": 4,
         "quantity": 28,
-        "observed": true,
-        "known_at": 4
-      },
-      {
-        "product": "p8",
-        "region": "华南",
-        "week": 4,
-        "quantity": 29,
         "observed": true,
         "known_at": 4
       },
@@ -764,14 +709,6 @@
         "known_at": 5
       },
       {
-        "product": "p8",
-        "region": "华东",
-        "week": 5,
-        "quantity": 22,
-        "observed": true,
-        "known_at": 5
-      },
-      {
         "product": "p9",
         "region": "华东",
         "week": 5,
@@ -836,14 +773,6 @@
         "known_at": 5
       },
       {
-        "product": "p8",
-        "region": "华南",
-        "week": 5,
-        "quantity": 31,
-        "observed": true,
-        "known_at": 5
-      },
-      {
         "product": "p9",
         "region": "华南",
         "week": 5,
@@ -904,14 +833,6 @@
         "region": "华东",
         "week": 6,
         "quantity": 28,
-        "observed": true,
-        "known_at": 6
-      },
-      {
-        "product": "p8",
-        "region": "华东",
-        "week": 6,
-        "quantity": 22,
         "observed": true,
         "known_at": 6
       },
@@ -980,14 +901,6 @@
         "known_at": 6
       },
       {
-        "product": "p8",
-        "region": "华南",
-        "week": 6,
-        "quantity": 29,
-        "observed": true,
-        "known_at": 6
-      },
-      {
         "product": "p9",
         "region": "华南",
         "week": 6,
@@ -1049,14 +962,6 @@
         "week": 7,
         "quantity": null,
         "observed": false,
-        "known_at": 7
-      },
-      {
-        "product": "p8",
-        "region": "华东",
-        "week": 7,
-        "quantity": 23,
-        "observed": true,
         "known_at": 7
       },
       {
@@ -1124,14 +1029,6 @@
         "known_at": 7
       },
       {
-        "product": "p8",
-        "region": "华南",
-        "week": 7,
-        "quantity": 24,
-        "observed": true,
-        "known_at": 7
-      },
-      {
         "product": "p9",
         "region": "华南",
         "week": 7,
@@ -1196,14 +1093,6 @@
         "known_at": 8
       },
       {
-        "product": "p8",
-        "region": "华东",
-        "week": 8,
-        "quantity": null,
-        "observed": false,
-        "known_at": 8
-      },
-      {
         "product": "p9",
         "region": "华东",
         "week": 8,
@@ -1264,14 +1153,6 @@
         "region": "华南",
         "week": 8,
         "quantity": 19,
-        "observed": true,
-        "known_at": 8
-      },
-      {
-        "product": "p8",
-        "region": "华南",
-        "week": 8,
-        "quantity": 21,
         "observed": true,
         "known_at": 8
       },
@@ -1340,14 +1221,6 @@
         "known_at": 10
       },
       {
-        "product": "p8",
-        "region": "华东",
-        "week": 9,
-        "quantity": 21,
-        "observed": true,
-        "known_at": 10
-      },
-      {
         "product": "p9",
         "region": "华东",
         "week": 9,
@@ -1408,14 +1281,6 @@
         "region": "华南",
         "week": 9,
         "quantity": 21,
-        "observed": true,
-        "known_at": 10
-      },
-      {
-        "product": "p8",
-        "region": "华南",
-        "week": 9,
-        "quantity": 17,
         "observed": true,
         "known_at": 10
       },
@@ -1484,14 +1349,6 @@
         "known_at": 10
       },
       {
-        "product": "p8",
-        "region": "华东",
-        "week": 10,
-        "quantity": 19,
-        "observed": true,
-        "known_at": 10
-      },
-      {
         "product": "p9",
         "region": "华东",
         "week": 10,
@@ -1552,14 +1409,6 @@
         "region": "华南",
         "week": 10,
         "quantity": 18,
-        "observed": true,
-        "known_at": 10
-      },
-      {
-        "product": "p8",
-        "region": "华南",
-        "week": 10,
-        "quantity": 21,
         "observed": true,
         "known_at": 10
       },
@@ -1628,14 +1477,6 @@
         "known_at": 11
       },
       {
-        "product": "p8",
-        "region": "华东",
-        "week": 11,
-        "quantity": 21,
-        "observed": true,
-        "known_at": 11
-      },
-      {
         "product": "p9",
         "region": "华东",
         "week": 11,
@@ -1696,14 +1537,6 @@
         "region": "华南",
         "week": 11,
         "quantity": 19,
-        "observed": true,
-        "known_at": 11
-      },
-      {
-        "product": "p8",
-        "region": "华南",
-        "week": 11,
-        "quantity": 20,
         "observed": true,
         "known_at": 11
       },
@@ -1772,14 +1605,6 @@
         "known_at": 12
       },
       {
-        "product": "p8",
-        "region": "华东",
-        "week": 12,
-        "quantity": 28,
-        "observed": true,
-        "known_at": 12
-      },
-      {
         "product": "p9",
         "region": "华东",
         "week": 12,
@@ -1844,14 +1669,6 @@
         "known_at": 12
       },
       {
-        "product": "p8",
-        "region": "华南",
-        "week": 12,
-        "quantity": 27,
-        "observed": true,
-        "known_at": 12
-      },
-      {
         "product": "p9",
         "region": "华南",
         "week": 12,
@@ -1912,14 +1729,6 @@
         "region": "华东",
         "week": 13,
         "quantity": 24,
-        "observed": true,
-        "known_at": 13
-      },
-      {
-        "product": "p8",
-        "region": "华东",
-        "week": 13,
-        "quantity": 26,
         "observed": true,
         "known_at": 13
       },
@@ -1988,14 +1797,6 @@
         "known_at": 13
       },
       {
-        "product": "p8",
-        "region": "华南",
-        "week": 13,
-        "quantity": 26,
-        "observed": true,
-        "known_at": 13
-      },
-      {
         "product": "p9",
         "region": "华南",
         "week": 13,
@@ -2060,14 +1861,6 @@
         "known_at": 14
       },
       {
-        "product": "p8",
-        "region": "华东",
-        "week": 14,
-        "quantity": 28,
-        "observed": true,
-        "known_at": 14
-      },
-      {
         "product": "p9",
         "region": "华东",
         "week": 14,
@@ -2128,14 +1921,6 @@
         "region": "华南",
         "week": 14,
         "quantity": 29,
-        "observed": true,
-        "known_at": 14
-      },
-      {
-        "product": "p8",
-        "region": "华南",
-        "week": 14,
-        "quantity": 31,
         "observed": true,
         "known_at": 14
       },
@@ -2204,14 +1989,6 @@
         "known_at": 15
       },
       {
-        "product": "p8",
-        "region": "华东",
-        "week": 15,
-        "quantity": 25,
-        "observed": true,
-        "known_at": 15
-      },
-      {
         "product": "p9",
         "region": "华东",
         "week": 15,
@@ -2272,14 +2049,6 @@
         "region": "华南",
         "week": 15,
         "quantity": 31,
-        "observed": true,
-        "known_at": 15
-      },
-      {
-        "product": "p8",
-        "region": "华南",
-        "week": 15,
-        "quantity": 29,
         "observed": true,
         "known_at": 15
       },
@@ -2348,14 +2117,6 @@
         "known_at": 16
       },
       {
-        "product": "p8",
-        "region": "华东",
-        "week": 16,
-        "quantity": 31,
-        "observed": true,
-        "known_at": 16
-      },
-      {
         "product": "p9",
         "region": "华东",
         "week": 16,
@@ -2416,14 +2177,6 @@
         "region": "华南",
         "week": 16,
         "quantity": 27,
-        "observed": true,
-        "known_at": 16
-      },
-      {
-        "product": "p8",
-        "region": "华南",
-        "week": 16,
-        "quantity": 35,
         "observed": true,
         "known_at": 16
       },
@@ -2492,14 +2245,6 @@
         "known_at": 17
       },
       {
-        "product": "p8",
-        "region": "华东",
-        "week": 17,
-        "quantity": 29,
-        "observed": true,
-        "known_at": 17
-      },
-      {
         "product": "p9",
         "region": "华东",
         "week": 17,
@@ -2560,14 +2305,6 @@
         "region": "华南",
         "week": 17,
         "quantity": 21,
-        "observed": true,
-        "known_at": 17
-      },
-      {
-        "product": "p8",
-        "region": "华南",
-        "week": 17,
-        "quantity": 32,
         "observed": true,
         "known_at": 17
       },
@@ -2636,14 +2373,6 @@
         "known_at": 19
       },
       {
-        "product": "p8",
-        "region": "华东",
-        "week": 18,
-        "quantity": 29,
-        "observed": true,
-        "known_at": 19
-      },
-      {
         "product": "p9",
         "region": "华东",
         "week": 18,
@@ -2701,14 +2430,6 @@
       },
       {
         "product": "p7",
-        "region": "华南",
-        "week": 18,
-        "quantity": 28,
-        "observed": true,
-        "known_at": 19
-      },
-      {
-        "product": "p8",
         "region": "华南",
         "week": 18,
         "quantity": 28,
@@ -2780,14 +2501,6 @@
         "known_at": 19
       },
       {
-        "product": "p8",
-        "region": "华东",
-        "week": 19,
-        "quantity": 27,
-        "observed": true,
-        "known_at": 19
-      },
-      {
         "product": "p9",
         "region": "华东",
         "week": 19,
@@ -2852,14 +2565,6 @@
         "known_at": 19
       },
       {
-        "product": "p8",
-        "region": "华南",
-        "week": 19,
-        "quantity": 25,
-        "observed": true,
-        "known_at": 19
-      },
-      {
         "product": "p9",
         "region": "华南",
         "week": 19,
@@ -2920,14 +2625,6 @@
         "region": "华东",
         "week": 20,
         "quantity": 24,
-        "observed": true,
-        "known_at": 20
-      },
-      {
-        "product": "p8",
-        "region": "华东",
-        "week": 20,
-        "quantity": 21,
         "observed": true,
         "known_at": 20
       },
@@ -2996,14 +2693,6 @@
         "known_at": 20
       },
       {
-        "product": "p8",
-        "region": "华南",
-        "week": 20,
-        "quantity": 23,
-        "observed": true,
-        "known_at": 20
-      },
-      {
         "product": "p9",
         "region": "华南",
         "week": 20,
@@ -3064,14 +2753,6 @@
         "region": "华东",
         "week": 21,
         "quantity": 24,
-        "observed": true,
-        "known_at": 21
-      },
-      {
-        "product": "p8",
-        "region": "华东",
-        "week": 21,
-        "quantity": 23,
         "observed": true,
         "known_at": 21
       },
@@ -3136,14 +2817,6 @@
         "region": "华南",
         "week": 21,
         "quantity": 22,
-        "observed": true,
-        "known_at": 21
-      },
-      {
-        "product": "p8",
-        "region": "华南",
-        "week": 21,
-        "quantity": 23,
         "observed": true,
         "known_at": 21
       },
@@ -3212,14 +2885,6 @@
         "known_at": 22
       },
       {
-        "product": "p8",
-        "region": "华东",
-        "week": 22,
-        "quantity": 24,
-        "observed": true,
-        "known_at": 22
-      },
-      {
         "product": "p9",
         "region": "华东",
         "week": 22,
@@ -3280,14 +2945,6 @@
         "region": "华南",
         "week": 22,
         "quantity": 23,
-        "observed": true,
-        "known_at": 22
-      },
-      {
-        "product": "p8",
-        "region": "华南",
-        "week": 22,
-        "quantity": 22,
         "observed": true,
         "known_at": 22
       },
