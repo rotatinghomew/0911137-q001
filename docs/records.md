@@ -4,13 +4,14 @@
 
 ### `products`
 
-字段：`inactive_from`、`name`、`product`。
+字段：`inactive_from`、`launched_at`、`name`、`product`。
 
 ```json
 {
   "product": "p1",
   "name": "款式1",
-  "inactive_from": null
+  "inactive_from": null,
+  "launched_at": 1
 }
 ```
 
