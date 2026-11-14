@@ -9,10 +9,14 @@ from urllib.parse import parse_qs, urlsplit
 from urllib.request import Request, urlopen
 
 from .domain import run
+from .forecasting import DEFAULT_HORIZON, MAX_HORIZON, build as forecast
 from .storage import AnalysisStore, read_dataset
 
 
 ROOT = Path(__file__).resolve().parents[1]
+HISTORY_KEYS = {'cutoff', 'group'}
+FORECAST_KEYS = {'cutoff', 'group', 'horizon', 'from', 'to', 'share'}
+PRODUCT_STATUS_KEYS = {'product', 'name', 'launched_at', 'inactive_from'}
 
 
 class Application:
@@ -23,12 +27,19 @@ class Application:
 
     def catalog(self):
         data, digest = read_dataset(self.dataset)
-        return {**data['meta'], 'digest': digest, 'tables': {name: len(rows) for name, rows in data['tables'].items()}}
+        return {
+            **data['meta'],
+            'digest': digest,
+            'tables': {name: len(rows) for name, rows in data['tables'].items()},
+            'products': [{key: row.get(key) for key in PRODUCT_STATUS_KEYS} for row in data['tables'].get('products', [])],
+            'categories': sorted({row['category'] for row in data['tables'].get('membership', []) if row.get('category')}),
+            'horizon': {'default': DEFAULT_HORIZON, 'maximum': MAX_HORIZON},
+            'forecast': True,
+        }
 
-    def analyze(self, supplied):
-        if not isinstance(supplied, dict) or set(supplied) - {'cutoff', 'group'}:
-            raise ValueError('只接受 cutoff 和 group 筛选项')
-        data, digest = read_dataset(self.dataset)
+    def cutoff(self, supplied, data, keys):
+        if set(supplied) - keys:
+            raise ValueError('存在未知筛选项')
         cutoff = supplied.get('cutoff', data['meta']['default_cutoff'])
         try:
             if isinstance(cutoff, bool) or float(cutoff) != int(cutoff):
@@ -41,9 +52,66 @@ class Application:
             raise ValueError('未知分析范围')
         if not data['meta']['min_cutoff'] <= cutoff <= data['meta']['max_cutoff']:
             raise ValueError('分析时点超出资料范围')
+        return cutoff, group
+
+    def analyze(self, supplied):
+        if not isinstance(supplied, dict):
+            raise ValueError('只接受分析筛选项')
+        mode = supplied.get('mode')
+        if mode is None:
+            mode = 'forecast' if set(supplied) & {'horizon', 'from', 'to', 'share'} else 'history'
+        if mode == 'history':
+            return self.analyze_history(supplied)
+        if mode == 'forecast':
+            return self.analyze_forecast(supplied)
+        raise ValueError('未知分析模式')
+
+    def analyze_history(self, supplied):
+        data, digest = read_dataset(self.dataset)
+        cutoff, group = self.cutoff(supplied, data, HISTORY_KEYS | {'mode'})
+        if supplied.get('mode', 'history') != 'history':
+            raise ValueError('未知分析模式')
         options = {'cutoff': cutoff, 'group': group}
         result = run(data['tables'], options)
         return {'digest': digest, 'options': options, 'result': result}
+
+    def analyze_forecast(self, supplied):
+        data, digest = read_dataset(self.dataset)
+        if set(supplied) - (FORECAST_KEYS | {'mode'}):
+            raise ValueError('只接受预测筛选项')
+        if supplied.get('mode', 'forecast') != 'forecast':
+            raise ValueError('未知分析模式')
+        cutoff, group = self.cutoff(supplied, data, FORECAST_KEYS | {'mode'})
+        raw = supplied.get('horizon', DEFAULT_HORIZON)
+        try:
+            if isinstance(raw, bool) or float(raw) != int(raw):
+                raise ValueError()
+            horizon = int(raw)
+        except (TypeError, ValueError, OverflowError):
+            raise ValueError('预测步长须为整数') from None
+        if not 1 <= horizon <= MAX_HORIZON:
+            raise ValueError(f'预测步长须在一到 {MAX_HORIZON} 周之间')
+        scenario = None
+        has_source, has_target = 'from' in supplied, 'to' in supplied
+        if has_source != has_target:
+            raise ValueError('替代情景须同时指定旧品与新品')
+        if has_source:
+            source, target, share = supplied['from'], supplied['to'], supplied.get('share', 1)
+            if not isinstance(source, str) or not isinstance(target, str):
+                raise ValueError('情景商品须为商品编号')
+            try:
+                share = float(share)
+            except (TypeError, ValueError, OverflowError):
+                raise ValueError('替代比例须为数值') from None
+            if not 0 < share <= 1:
+                raise ValueError('替代比例须大于 0 且不超过 1')
+            scenario = {'from': source, 'to': target, 'share': share}
+        options = {'cutoff': cutoff, 'group': group, 'mode': 'forecast', 'horizon': horizon}
+        if scenario:
+            options.update({'from': scenario['from'], 'to': scenario['to'], 'share': scenario['share']})
+        result = forecast(data['tables'], {**options, 'scenario': scenario})
+        return {'digest': digest, 'options': options, 'result': result}
+
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -69,7 +137,9 @@ class Handler(BaseHTTPRequestHandler):
             if request.path == '/api/catalog':
                 value = self.application.catalog()
             elif request.path == '/api/view':
-                value = self.application.analyze(query)
+                value = self.application.analyze_history(query)
+            elif request.path == '/api/forecast':
+                value = self.application.analyze_forecast(query)
             elif request.path == '/api/analyses':
                 value = self.application.store.list()
             elif request.path.startswith('/api/analyses/'):
@@ -136,12 +206,28 @@ def main():
         try:
             with urlopen(base + '/api/view') as response:
                 value = json.load(response)
-            request = Request(base + '/api/analyses', data=json.dumps({'title': '当前资料摘要', 'options': value['options']}).encode(), headers={'Content-Type': 'application/json'})
+            with urlopen(base + '/api/forecast') as response:
+                forecast = json.load(response)
+            payload = {'title': '当前资料摘要', 'options': value['options']}
+            request = Request(base + '/api/analyses', data=json.dumps(payload).encode(), headers={'Content-Type': 'application/json'})
             with urlopen(request) as response:
                 saved = json.load(response)
             with urlopen(base + '/api/analyses/' + saved['id']) as response:
                 restored = json.load(response)
-            print(json.dumps({'当前摘要': value['result']['summary'], '资料指纹': value['digest'], '保存后相同': restored['result'] == value['result'], '说明': value['result']['notes']}, ensure_ascii=False, indent=2))
+            payload = {'title': '当前补货预测', 'options': forecast['options']}
+            request = Request(base + '/api/analyses', data=json.dumps(payload).encode(), headers={'Content-Type': 'application/json'})
+            with urlopen(request) as response:
+                saved_forecast = json.load(response)
+            with urlopen(base + '/api/analyses/' + saved_forecast['id']) as response:
+                restored_forecast = json.load(response)
+            print(json.dumps({
+                '当前摘要': value['result']['summary'],
+                '补货预测': forecast['result']['summary'],
+                '首周总计划': forecast['result']['levels']['total']['forecast'][0],
+                '资料指纹': value['digest'],
+                '保存后相同': restored['result'] == value['result'] and restored_forecast['result'] == forecast['result'],
+                '说明': value['result']['notes'][:1] + forecast['result']['notes'][:2],
+            }, ensure_ascii=False, indent=2))
         finally:
             httpd.shutdown()
             worker.join()

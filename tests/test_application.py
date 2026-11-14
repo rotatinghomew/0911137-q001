@@ -43,7 +43,38 @@ class ApplicationTests(unittest.TestCase):
         self.assertEqual(restored['options'], view['options'])
         self.assertEqual(len(self.get('/api/analyses')), 1)
 
-    def test_real_assets(self):
+    def test_forecast_endpoint_and_saved_version(self):
+        forecast = self.get('/api/forecast?cutoff=24&horizon=4&from=p9&to=p8&share=0.5')
+        self.assertEqual(forecast['options']['mode'], 'forecast')
+        self.assertTrue(forecast['result']['rows'])
+        self.assertTrue(forecast['result']['levels']['total']['forecast'])
+        self.assertTrue(forecast['result']['scenario']['supported'])
+        payload = {'title': '补货讨论', 'options': forecast['options']}
+        request = Request(self.base + '/api/analyses', data=json.dumps(payload).encode(), headers={'Content-Type': 'application/json'})
+        with urlopen(request) as response:
+            self.assertEqual(response.status, 201)
+            saved = json.load(response)
+        restored = self.get('/api/analyses/' + saved['id'])
+        self.assertEqual(restored['result'], forecast['result'])
+        self.assertEqual(restored['options']['mode'], 'forecast')
+
+    def test_forecast_bad_filters(self):
+        for path in ['/api/forecast?horizon=0', '/api/forecast?horizon=9', '/api/forecast?horizon=1.5', '/api/forecast?from=p7', '/api/forecast?from=nope&to=p8', '/api/forecast?from=p7&to=p7', '/api/forecast?from=p7&to=p8&share=0', '/api/forecast?from=p7&to=p8&share=2', '/api/forecast?cutoff=99', '/api/forecast?group=missing', '/api/forecast?extra=1']:
+            with self.assertRaises(HTTPError) as caught:
+                self.get(path)
+            self.assertEqual(caught.exception.code, 400)
+
+    def test_catalog_exposes_forecast_capability(self):
+        catalog = self.get('/api/catalog')
+        self.assertTrue(catalog['forecast'])
+        self.assertEqual(catalog['horizon']['maximum'], 8)
+        self.assertEqual({row['product'] for row in catalog['products']}, {'p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9'})
+
+    def test_history_view_keeps_original_contract(self):
+        view = self.get('/api/view?cutoff=24')
+        self.assertEqual(set(view['result']), {'rows', 'summary', 'notes'})
+        self.assertEqual(set(view['options']), {'cutoff', 'group'})
+        self.assertEqual(view['result']['summary'], {'销量': 6886, '有效观测': 363, '未知观测': 25})
         for path, marker in [('/', '<html lang="zh-CN">'), ('/app.js', 'fetch('), ('/style.css', ':root')]:
             with urlopen(self.base + path) as response:
                 self.assertIn(marker, response.read().decode())
